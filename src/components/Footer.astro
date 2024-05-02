@@ -1,26 +1,33 @@
----
-const currentYear = new Date().getFullYear()
----
-
 <footer
-  class="rounded-lg shadow m-4 bg-black/5 dark:bg-black/20 backdrop-blur-lg w-full mx-auto container lg:max-w-4xl md:max-w-2xl mb-10 flex justify-center"
+  class="rounded-lg shadow m-4 bg-black/5 backdrop-blur-lg w-full mx-auto container lg:max-w-4xl md:max-w-2xl mb-10 flex justify-center"
 >
   <div
-    class="w-full max-w-screen-xl mx-auto md:flex md:items-center md:justify-between"
+    class="w-full max-w-screen-xl py-2 mx-auto flex items-center justify-between"
   >
-    <span class="text-sm sm:text-center text-zinc-800/90 dark:text-zinc-200/90"
-      >© {currentYear}
-      <a href="https://midu.dev/" class="hover:underline">Facundo Pascale</a>. Casi
-      todos los derechos reservados
+    <span
+      class="ml-2 text-sm sm:text-center text-zinc-800/90 dark:text-zinc-200/90"
+    >
+      Inspirado en el trabajo de
+      <a
+        role="link"
+        href="https://midu.dev/"
+        class="hover:underline text-orange-500">MiduDev</a
+      >
     </span>
     <ul
-      class="flex flex-wrap items-center mt-3 text-sm font-medium dark:text-white/90 sm:mt-0"
+      class="flex flex-wrap items-center mr-2 text-sm font-medium dark:text-white/90"
     >
       <li>
-        <a href="/#sobre-mi" class="hover:underline me-4 md:me-6">Sobre mí</a>
+        <a role="link" href="/#sobre-mi" class="hover:underline me-4 md:me-6"
+          >Sobre mí</a
+        >
       </li>
       <li>
-        <a href="mailto:facundopascale@gmail.com" class="hover:underline">Contacto</a>
+        <a
+          role="link"
+          href="mailto:facundopascale@gmail.com"
+          class="hover:underline">Contacto</a
+        >
       </li>
     </ul>
   </div>

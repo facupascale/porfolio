@@ -1,92 +1,57 @@
 ---
-import ThemeToggle from "./ThemeToggle.astro"
+import HeaderLink from './HeaderLink.astro'
+import { ThemeToggleButton } from './ThemeToggleButton'
+import { getRelativeLocaleUrlList, getRelativeLocaleUrl } from 'astro:i18n'
 
 const navItems = [
   {
-    title: "Experiencia",
-    label: "experiencia",
-    url: "/#experiencia",
+    title: 'Experiencia',
+    label: 'experiencia',
+    url: `${getRelativeLocaleUrl('es', '#experience')}`,
   },
   {
-    title: "Proyectos",
-    label: "proyectos",
-    url: "/#proyectos",
+    title: 'Proyectos',
+    label: 'proyectos',
+    url: '/#proyectos',
   },
   {
-    title: "Sobre mí",
-    label: "sobre-mi",
-    url: "/#sobre-mi",
+    title: 'Sobre mí',
+    label: 'sobre-mi',
+    url: '/#sobre-mi',
   },
   {
-    title: "Contacto",
-    label: "contacto",
-    url: "/#contacto",
+    title: 'Contacto',
+    label: 'contacto',
+    url: 'mailto:facundopascale@gmail.com',
   },
 ]
+
+const localeUrls = getRelativeLocaleUrlList()
 ---
 
 <header
-  class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
+  class="fixed flex flex-row w-auto p-2 z-20 self-center justify-between items-center"
 >
   <nav
-    class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
+    class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center my-1 gap-4"
   >
     {
       navItems.map((link) => (
-        <a
-          class="relative block px-2 py-2 transition hover:text-yellow-500 dark:hover:text-yellow-400"
-          aria-label={link.label}
-          href={link.url}
-        >
+        <HeaderLink aria-label={link.label} href={link.url}>
           {link.title}
+        </HeaderLink>
+      ))
+    }
+    {
+      localeUrls.map((lg) => (
+        <a href={lg} class="inline-block p-1">
+          {lg}
         </a>
       ))
     }
-    <ThemeToggle />
+    <ThemeToggleButton client:only />
   </nav>
 </header>
-
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const sections = document.querySelectorAll("section")
-    const navItems = document.querySelectorAll("header nav a")
-
-    const callback = (entries: any[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add("text-yellow-500")
-            } else {
-              item.classList.remove("text-yellow-500")
-            }
-          })
-        }
-      })
-    }
-
-    const observer = new IntersectionObserver(callback, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
-    })
-
-    sections.forEach((section) => {
-      observer.observe(section)
-    })
-
-    // Cleanup function
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") {
-        observer.disconnect()
-      } else {
-        sections.forEach((section) => {
-          observer.observe(section)
-        })
-      }
-    }
-  })
-</script>
 
 <style>
   nav {
@@ -97,7 +62,7 @@ const navItems = [
 
   @keyframes nav-shadown {
     to {
-      @apply shadow-lg ring-1 backdrop-blur bg-gray-300/60 dark:bg-gray-800/60 ring-white/10;
+      @apply shadow-lg ring-1 backdrop-blur  ring-white/10;
     }
   }
 </style>

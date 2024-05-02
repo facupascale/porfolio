@@ -1,0 +1,64 @@
+---
+export interface Props extends astroHTML.JSX.AnchorHTMLAttributes {}
+
+const { href, class: classname, ...props } = Astro.props
+---
+
+<a role="link" href={href} class="inline-flex items-center h-12" {...props}>
+  <slot />
+</a>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const sections = document.querySelectorAll('section')
+    const navItems = document.querySelectorAll('header nav a')
+
+    const callback = (entries: any[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navItems.forEach((item) => {
+            if (item.getAttribute('aria-label') == entry.target.id) {
+              item.classList.add('text-orange-500', 'font-bold')
+            } else {
+              item.classList.remove('text-orange-500', 'font-bold')
+            }
+          })
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(callback, {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.3,
+    })
+
+    sections.forEach((section) => {
+      observer.observe(section)
+    })
+
+    // Cleanup function
+    document.onvisibilitychange = () => {
+      if (document.visibilityState === 'hidden') {
+        observer.disconnect()
+      } else {
+        sections.forEach((section) => {
+          observer.observe(section)
+        })
+      }
+    }
+  })
+</script>
+<style>
+  a {
+    display: inline-flex;
+    text-decoration: none;
+    align-itmes: center;
+    gap: 4px;
+  }
+
+  a.active {
+    font-weight: bolder;
+    text-decoration: underline;
+  }
+</style>
