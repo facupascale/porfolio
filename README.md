@@ -10,6 +10,6 @@
 <div align="center">
 
 ![Astro Badge](https://img.shields.io/badge/Astro-FF3E00?logo=astro&logoColor=fff&style=flat)
-![Midu Dev Template](https://github.com/midudev/porfolio.dev)
+![Inspirado en el template de midudev](https://github.com/midudev/porfolio.dev)
 
 </div>
