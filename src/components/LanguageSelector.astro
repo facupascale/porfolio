@@ -1,0 +1,49 @@
+---
+import { LANGUAGES } from '../i18n/ui'
+import {
+  getRouteFromUrl,
+  useTranslatedPath,
+  getLangFromUrl,
+} from '../i18n/utils'
+
+const route = getRouteFromUrl(Astro.request.url, Astro.url)
+const lang = getLangFromUrl(Astro.url)
+const translatePath = useTranslatedPath(lang)
+
+const currentLocaleData = LANGUAGES[lang]
+const otherLocales = Object.values(LANGUAGES).filter(
+  (locale) => locale.code !== lang,
+)
+---
+
+<div class="relative inline-block text-left">
+  <div
+    class="group text-white rounded-md text-xs font-semibold backdrop-blur hover:bg-orange-500 transition-all"
+  >
+    <button
+      type="button"
+      class="inline-flex justify-start items-center w-full px-2 py-2"
+      aria-expanded="true"
+      aria-haspopup="true"
+    >
+      <currentLocaleData.flag />
+    </button>
+    <ul
+      class="group-hover:block group-hover:animate-fade-down group-hover:animate-duration-200 hidden pt-2 h-auto absolute"
+    >
+      {
+        otherLocales.map((locale) => (
+          <li class="w-auto pt-1">
+            <a
+              class=" bg-orange-300 text-zinc-600 hover:text-zinc-800 hover:bg-orange-500 dark:bg-zinc-800 dark:hover:bg-orange-500 dark:text-white rounded-full whitespace-no-wrap inline-flex justify-start items-center gap-x-2 px-5 py-2 "
+              href={translatePath(`/${route ? route : ''}`, locale.code)}
+            >
+              <locale.flag />
+              {locale.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

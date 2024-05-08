@@ -1,39 +1,50 @@
 ---
 import HeaderLink from './HeaderLink.astro'
+import LanguageSelector from './LanguageSelector.astro'
 import { ThemeToggleButton } from './ThemeToggleButton'
-import { getRelativeLocaleUrlList, getRelativeLocaleUrl } from 'astro:i18n'
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from '@/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
+
+const getUrlTranslate = (key: string): string => {
+  return t(key).toLowerCase()
+}
 
 const navItems = [
   {
-    title: 'Experiencia',
-    label: 'experiencia',
-    url: `${getRelativeLocaleUrl('es', '#experience')}`,
+    title: `${t('nav.experience')}`,
+    label: `${t('nav.experience')}`,
+    url: `${translatePath(`/#${getUrlTranslate('nav.experience')}`)}`,
   },
   {
-    title: 'Proyectos',
-    label: 'proyectos',
-    url: '/#proyectos',
+    title: `${t('nav.projects')}`,
+    label: `${t('nav.projects')}`,
+    url: `${translatePath(`/#${getUrlTranslate('nav.projects')}`)}`,
   },
   {
-    title: 'Sobre mí',
-    label: 'sobre-mi',
-    url: '/#sobre-mi',
+    title: `${t('nav.about-me')}`,
+    label: `${t('nav.about-me')}`,
+    url: `${translatePath(`/#${getUrlTranslate('nav.about-me')}`)}`,
   },
   {
-    title: 'Contacto',
-    label: 'contacto',
+    title: `${t('nav.contact')}`,
+    label: `${t('nav.contact')}`,
     url: 'mailto:facundopascale@gmail.com',
   },
 ]
-
-const localeUrls = getRelativeLocaleUrlList()
 ---
 
 <header
   class="fixed flex flex-row w-auto p-2 z-20 self-center justify-between items-center"
 >
   <nav
-    class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center my-1 gap-4"
+    class="flex px-2 text-sm font-medium rounded-full text-zinc-600 dark:text-gray-200 justify-center items-center my-1"
   >
     {
       navItems.map((link) => (
@@ -42,13 +53,7 @@ const localeUrls = getRelativeLocaleUrlList()
         </HeaderLink>
       ))
     }
-    {
-      localeUrls.map((lg) => (
-        <a href={lg} class="inline-block p-1">
-          {lg}
-        </a>
-      ))
-    }
+    <LanguageSelector />
     <ThemeToggleButton client:only />
   </nav>
 </header>

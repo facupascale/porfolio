@@ -4,7 +4,12 @@ export interface Props extends astroHTML.JSX.AnchorHTMLAttributes {}
 const { href, class: classname, ...props } = Astro.props
 ---
 
-<a role="link" href={href} class="inline-flex items-center h-12" {...props}>
+<a
+  role="link"
+  href={href}
+  class="px-1 md:px-2 inline-flex items-center h-12 hover:text-orange-500"
+  {...props}
+>
   <slot />
 </a>
 
