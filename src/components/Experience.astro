@@ -1,41 +1,53 @@
 ---
 import ExperienceItem from './ExperienceItem.astro'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
-const EXPERIENCE = [
+type ExperienceItem = {
+  date: string
+  company: string
+  title: string
+  description: string
+}
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const EXPERIENCE: ExperienceItem[] = [
   {
-    date: 'Agosto 2020 - Hasta Ahora',
-    company: 'Freelance',
-    title: 'Desarrollador Web/Mobile Multiplataforma',
-    description:
-      'Soy un desarrollador web y móvil freelance con experiencia en React Native, React.js, Next.js, Astro y Expo. He trabajado en una variedad de proyectos, desde aplicaciones móviles hasta sitios web, siempre enfocado en ofrecer soluciones creativas y funcionales. ¡Estoy listo para llevar tus ideas al siguiente nivel!',
+    date: t('experience.freelance.date'),
+    company: t('experience.freelance.company'),
+    title: t('experience.freelance.title'),
+    description: t('experience.freelance.description'),
   },
   {
-    date: 'Septiembre 2023 - Abril 2024',
-    title: 'Desarrollador Web / Mobile Multiplataforma',
-    company: 'Magnetico',
-    description:
-      'Responsable del desarrollo de las soluciones moviles de la empresa, participando en la planificacion y ejecucion de la misma en diferentes equipos',
+    date: t('experience.desafio-latam.date'),
+    company: t('experience.desafio-latam.company'),
+    title: t('experience.desafio-latam.title'),
+    description: t('experience.desafio-latam.description'),
   },
   {
-    date: 'Febrero 2022 - Febrero 2024',
-    title: 'Desarrollador Web/Mobile Multiplataforma',
-    company: 'LenioLabs',
-    description:
-      'Participacion en diferentes equipos multiculturales con diferentes tecnologias. Responsable del desarollo front end y en ocasiones de las librerias UI diseñadas para algún cliente en particular.',
+    date: t('experience.magnetico.date'),
+    company: t('experience.magnetico.company'),
+    title: t('experience.magnetico.title'),
+    description: t('experience.magnetico.description'),
   },
   {
-    date: 'Septiembre 2021 - Enero 2023',
-    title: 'Profesor y Tutor - Desarrollo Mobile Multiplataforma',
-    company: 'Coderhouse',
-    description:
-      'Como Profesor mis responsabilidades eran el dictado de clases en vivo, correción de proyectos de mitad/fin de curso y la coordinación del equipo para poder brindarle a los alumnos la mejor experiencia posible',
+    date: t('experience.leniolabs.date'),
+    company: t('experience.leniolabs.company'),
+    title: t('experience.leniolabs.title'),
+    description: t('experience.leniolabs.description'),
   },
   {
-    date: 'Agosto 2021 - Enero 2022',
-    title: 'Desarrollador Mobile Multiplataforma',
-    company: 'Learsoft',
-    description:
-      'Responsable en el desarrollo de una billetera virtual, asistencia a mi compañeros, revisión de pull requests y participación en la planificación del proyecto.',
+    date: t('experience.coderhouse.date'),
+    company: t('experience.coderhouse.company'),
+    title: t('experience.coderhouse.title'),
+    description: t('experience.coderhouse.description'),
+  },
+  {
+    date: t('experience.learsoft.date'),
+    company: t('experience.learsoft.company'),
+    title: t('experience.learsoft.title'),
+    description: t('experience.learsoft.description'),
   },
 ]
 ---

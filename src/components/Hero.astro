@@ -5,6 +5,13 @@ import Badge from '@/components/Badge.astro'
 import LinkedInIcon from '@/components/icons/LinkedIn.astro'
 import MailIcon from '@/components/icons/Mail.astro'
 import SocialPill from '@/components/SocialPill.astro'
+
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const heroDescription = t('hero.description')
 ---
 
 <div class="max-w-xl">
@@ -20,28 +27,26 @@ import SocialPill from '@/components/SocialPill.astro'
       rel="noopener"
       class="flex items-center transition md:justify-center md:hover:scale-105"
     >
-      <Badge>Disponible para trabajar</Badge>
+      <Badge>{t('hero.badge')}</Badge>
     </a>
   </div>
   <h1
     class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
   >
-    Hey, soy Facundo
+    {t('hero.title')}
   </h1>
   <p
     class="mt-6 text-xl text-gray-800 dark:[&>strong]:text-grey-200 [&>strong]:text-orange-500 [&>strong]:font-semibold dark:text-gray-300"
-  >
-    +4 años de experiencia. <strong>Desarrollador Web / Mobile</strong>.
-    Especializado en el desarrollo de aplicaciones únicas.
-  </p>
+    set:html={heroDescription}
+  />
   <nav class="flex flex-wrap gap-4 mt-8">
     <SocialPill href="mailto:facundopascale@gmail.com">
       <MailIcon class="size-4" />
-      Contáctame
+      {t('hero.contact')}
     </SocialPill>
     <SocialPill href="https://linkedin.com/in/facundopascale">
       <LinkedInIcon class="size-4" />
-      LinkedIn
+      {t('hero.linkedin')}
     </SocialPill>
   </nav>
 </div>

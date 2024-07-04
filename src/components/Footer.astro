@@ -1,5 +1,12 @@
+---
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+---
+
 <footer
-  class="rounded-lg shadow m-4 bg-zinc-800 self-center backdrop-blur-lg w-11/12 container lg:max-w-4xl md:max-w-2xl mb-5 md:mb-10 flex justify-center"
+  class="rounded-lg shadow m-4 bg-orange-50 dark:bg-zinc-800 self-center backdrop-blur-lg w-11/12 container lg:max-w-4xl md:max-w-2xl mb-5 md:mb-10 flex justify-center"
 >
   <div
     class="w-full max-w-screen-xl py-2 mx-auto flex items-center justify-between"
@@ -7,7 +14,7 @@
     <span
       class="ml-2 text-sm sm:text-center text-zinc-800/90 dark:text-zinc-200/90"
     >
-      Inspirado en el template de
+      {t('footer.text_1')}
       <a
         role="link"
         href="https://midu.dev/"
@@ -18,15 +25,10 @@
       class="w-6/12 flex justify-end items-center mr-2 text-sm font-medium dark:text-white/90"
     >
       <li>
-        <a role="link" href="/#sobre-mi" class="hover:underline me-4 md:me-6"
-          >Sobre mí</a
-        >
-      </li>
-      <li>
         <a
           role="link"
           href="mailto:facundopascale@gmail.com"
-          class="hover:underline">Contacto</a
+          class="hover:underline">{t('hero.contact')}</a
         >
       </li>
     </ul>

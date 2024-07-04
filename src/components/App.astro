@@ -9,11 +9,7 @@ import Projects from './Projects.astro'
 import SectionContainer from './SectionContainer.astro'
 import Hero from './Hero.astro'
 
-import {
-  getLangFromUrl,
-  useTranslatedPath,
-  useTranslations,
-} from '@/i18n/utils'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
@@ -31,7 +27,7 @@ const t = useTranslations(lang)
         class="flex items-center mb-6 ml-2 sm:ml-1 md:ml-0 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white"
       >
         <Briefcase class="size-8" />
-        Experiencia laboral
+        {t('experience.title')}
       </h2>
       <Experience />
     </SectionContainer>
@@ -41,7 +37,7 @@ const t = useTranslations(lang)
         class="flex items-center mb-6 ml-2 sm:ml-1 md:ml-0 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white"
       >
         <CodeIcon class="size-7" />
-        Proyectos
+        {t('projects.title')}
       </h2>
       <Projects />
     </SectionContainer>
@@ -51,7 +47,7 @@ const t = useTranslations(lang)
         class="flex items-center mb-6 ml-2 sm:ml-1 md:ml-0 text-3xl font-semibold gap-x-8 text-black/80 dark:text-white"
       >
         <ProfileCheck class="size-8" />
-        Sobre mí
+        {t('aboutme.title')}
       </h2>
       <AboutMe />
     </SectionContainer>

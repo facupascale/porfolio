@@ -1,5 +1,14 @@
 ---
 const personalImageAlt = 'Facundo Pascale'
+
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const firstPDescription = t('aboutme.description_1')
+const secondPDescription = t('aboutme.description_2')
+const thirdPDescription = t('aboutme.description_3')
 ---
 
 <article
@@ -8,23 +17,11 @@ const personalImageAlt = 'Facundo Pascale'
   <div
     class="[&>p]:mb-4 [&>p>strong]:text-orange-500 dark:[&>p>strong]:text-orange-300 [&>p>strong]:font-normal [&>p>strong]:font-mono text-pretty order-2 md:order-1"
   >
-    <p>
-      Hola! Soy Facundo Pascale, <strong
-        >un desarrollador de aplicaciones web y móviles</strong
-      > comprometido con la resolución creativa de problemas.
-    </p>
+    <p set:html={firstPDescription} />
 
-    <p>
-      Destaco por mi <strong
-        >dedicación, habilidades interpersonales y capacidad para liderar y
-        tomar decisiones.
-      </strong>
-    </p>
+    <p set:html={secondPDescription} />
 
-    <p>
-      Me encantar enfrentar desafíos y trabajar en equipo para lograr resultados
-      excepcionales
-    </p>
+    <p set:html={thirdPDescription} />
   </div>
   <!-- TODO: poner una foto linda aca -->
   <!-- <img width="200" height="200" src="/me.png" alt={personalImageAlt} class="order-1 object-cover w-64 h-full p-1 bg-white md:order-2 rotate-3 lg:p-2 lg:w-64 aspect-square rounded-2xl dark:bg-yellow-500/5 ring-1 ring-white/20 " style="object-position: 50% 50%"> -->
